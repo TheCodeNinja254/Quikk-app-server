@@ -1,4 +1,4 @@
-const {RESTDataSource} = require("apollo-datasource-rest");
+const { RESTDataSource } = require("apollo-datasource-rest");
 const https = require("https");
 const config = require("dotenv").config();
 const headersConfig = require("../../utils/headersConfig");
@@ -6,145 +6,124 @@ const headersConfig = require("../../utils/headersConfig");
 const configValues = config.parsed;
 
 class AuthenticationAPI extends RESTDataSource {
-    constructor() {
-        super();
-        this.baseURL = configValues.API_BASE_URL;
-    }
+  constructor() {
+    super();
+    this.baseURL = configValues.API_BASE_URL;
+  }
 
-    willSendRequest(request) {
-        headersConfig.prototype.apiHeaders(request);
-    }
+  willSendRequest(request) {
+    headersConfig.prototype.apiHeaders(request);
+  }
 
-    async signIn(args) {
+  async signIn(args) {
+    const {
+      input: { username, password },
+    } = args;
+
+    const body = {
+      username,
+      password,
+    };
+
+    try {
+      const apiUrl = `${this.baseURL}/sign-in`;
+      const response = await this.post(apiUrl, body, {
+        agent: new https.Agent({
+          rejectUnauthorized: false,
+        }),
+      });
+      const {
+        header: { responseCode, responseMessage },
+      } = response;
+      let status = false;
+      if (responseCode === 200) {
         const {
-            input: {
-                username,
-                password,
-            },
-        } = args;
-
-        const body = {
-            username,
-            password,
-        };
-
-        try {
-            const apiUrl = `${this.baseURL}/sign-in`;
-            const response = await this.post(apiUrl, body, {
-                agent: new https.Agent({
-                    rejectUnauthorized: false,
-                }),
-            });
-            const {
-                header: {responseCode, responseMessage},
-            } = response;
-            let status = false;
-            if (responseCode === 200) {
-                const {
-                    body: {
-                        firstName,
-                        lastName,
-                        emailAddress,
-                        accountInfo,
-                        lastLogin,
-                        phoneNumber
-                    },
-                } = response;
-
-                status = true;
-                return {
-                    status,
-                    message: responseMessage,
-                    firstName,
-                    lastName,
-                    emailAddress,
-                    accountInfo,
-                    lastLogin,
-                    phoneNumber
-                };
-            } else {
-                return {
-                    status,
-                    message: responseMessage,
-                };
-            }
-        } catch (e) {
-            throw new Error(
-                "Sign in failed, please try again later"
-            );
-        }
-    }
-
-    async createAccount(args) {
-        const {
-            input: {
-                username,
-                password,
-                emailAddress,
-                firstName,
-                lastName,
-                phoneNumber,
-                rechargeAmount,
-            },
-        } = args;
-
-        const body = {
-            username,
-            password,
-            emailAddress,
+          body: {
             firstName,
             lastName,
+            emailAddress,
+            accountInfo,
+            lastLogin,
             phoneNumber,
-            rechargeAmount,
+          },
+        } = response;
+
+        status = true;
+        return {
+          status,
+          message: responseMessage,
+          firstName,
+          lastName,
+          emailAddress,
+          accountInfo,
+          lastLogin,
+          phoneNumber,
         };
-
-        try {
-            const apiUrl = `${this.baseURL}/user-account`;
-            const response = await this.post(apiUrl, body, {
-                agent: new https.Agent({
-                    rejectUnauthorized: false,
-                }),
-            });
-            const {
-                header: {responseCode, responseMessage},
-            } = response;
-            let status = false;
-            if (responseCode === 200) {
-                const {
-                    body: {
-                        username,
-                        emailAddress,
-                        firstName,
-                        lastName,
-                        phoneNumber,
-                        accountBalance,
-                    },
-                } = response;
-
-                status = true;
-                return {
-                    status,
-                    message: responseMessage,
-                    username,
-                    emailAddress,
-                    firstName,
-                    lastName,
-                    phoneNumber,
-                    accountBalance,
-                };
-            } else {
-              return {
-                status,
-                message: responseMessage,
-              };
-            }
-        } catch (e) {
-            throw new Error(
-                "Unable to create your account, please try again later"
-            );
-        }
+      }
+      return {
+        status,
+        message: responseMessage,
+      };
+    } catch (e) {
+      throw new Error("Sign in failed, please try again later");
     }
+  }
 
+  async createAccount(args) {
+    const {
+      input: {
+        username,
+        password,
+        emailAddress,
+        firstName,
+        lastName,
+        phoneNumber,
+        rechargeAmount,
+      },
+    } = args;
+
+    const body = {
+      username,
+      password,
+      emailAddress,
+      firstName,
+      lastName,
+      phoneNumber,
+      rechargeAmount,
+    };
+
+    try {
+      const apiUrl = `${this.baseURL}/user-account`;
+      const response = await this.post(apiUrl, body, {
+        agent: new https.Agent({
+          rejectUnauthorized: false,
+        }),
+      });
+      const {
+        header: { responseCode, responseMessage },
+      } = response;
+      let status = false;
+      if (responseCode === 200) {
+        status = true;
+        return {
+          status,
+          message: responseMessage,
+          username: body.username,
+          emailAddress: body.emailAddress,
+          firstName: body.firstName,
+          lastName: body.lastName,
+          phoneNumber: body.phoneNumber,
+          accountBalance: body.accountBalance,
+        };
+      }
+      return {
+        status,
+        message: responseMessage,
+      };
+    } catch (e) {
+      throw new Error("Unable to create your account, please try again later");
+    }
+  }
 }
 
 module.exports = AuthenticationAPI;

@@ -1,7 +1,7 @@
-const isPlainObject = require('lodash/isPlainObject');
-const camelCase = require('lodash/camelCase');
-const keys = require('lodash/keys');
-const isEmpty = require('lodash/isEmpty');
+const isPlainObject = require("lodash/isPlainObject");
+const camelCase = require("lodash/camelCase");
+const keys = require("lodash/keys");
+const isEmpty = require("lodash/isEmpty");
 
 const convertKeys = (data) => {
   // handle simple types

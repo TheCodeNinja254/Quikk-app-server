@@ -19,11 +19,15 @@ module.exports = {
     },
   }),
   Query: {
-    getTransactions: (_, __, { dataSources }) => dataSources.transactions.getTransactions(),
+    getTransactions: (_, __, { dataSources }) =>
+      dataSources.transactions.getTransactions(),
   },
   Mutation: {
-    sendMoney: (_, args, { dataSources }) => dataSources.transactions.sendMoney(args),
-    signIn: (_, args, { dataSources }) => dataSources.authentication.signIn(args),
-    createAccount: (_, args, { dataSources }) => dataSources.authentication.createAccount(args),
+    sendMoney: (_, args, { dataSources }) =>
+      dataSources.transactions.sendMoney(args),
+    signIn: (_, args, { dataSources }) =>
+      dataSources.authentication.signIn(args),
+    createAccount: (_, args, { dataSources }) =>
+      dataSources.authentication.createAccount(args),
   },
 };

@@ -12,12 +12,12 @@ const typeDefs = gql`
     createAccount(input: CreateAccountInput!): CreateAccountResponse!
     sendMoney(input: SendMoneyInput!): SendMoneyResponse!
   }
-  
+
   input SignInInput {
     username: String!
     password: String!
   }
-  
+
   input CreateAccountInput {
     username: String
     password: String
@@ -26,8 +26,8 @@ const typeDefs = gql`
     lastName: String
     phoneNumber: String
     rechargeAmount: Int
-  } 
-  
+  }
+
   type CreateAccountResponse {
     status: Boolean!
     message: String!
@@ -38,13 +38,13 @@ const typeDefs = gql`
     phoneNumber: String
     accountBalance: Int
   }
-  
+
   input SendMoneyInput {
     recipientId: String
     recipientIdType: String
     amount: Int
   }
-  
+
   type SignInResponse {
     status: Boolean
     message: String
@@ -55,7 +55,7 @@ const typeDefs = gql`
     lastLogin: Date
     accountInfo: accountInfo
   }
-  
+
   type SendMoneyResponse {
     status: Boolean!
     message: String!
@@ -64,18 +64,18 @@ const typeDefs = gql`
     newBalance: Int
     timestamp: Date
   }
-  
+
   type accountInfo {
     accountBalance: Int
     accountPrimaryCurrency: String
     accountStatus: String
   }
-  
+
   type TransactionsData {
     getTransactionsStatus: Boolean!
     transactions: [Transactions]
   }
-  
+
   type Transactions {
     transactionId: Int!
     recipientEmail: String

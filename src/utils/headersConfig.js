@@ -10,7 +10,7 @@ const commonHeaders = {
 class HeadersConfig {
   apiHeaders(request) {
     const headers = {
-      "Authorization": `Bearer ${configValues.BEARER_TOKEN}`,
+      Authorization: `Bearer ${configValues.BEARER_TOKEN}`,
     };
 
     // Add common headers
