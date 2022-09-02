@@ -1,0 +1,58 @@
+[
+  {
+    "technicalError": "ECONNREFUSED",
+    "customerMessage": "We are unable to complete your request. Please try again later."
+  },
+  {
+    "technicalError": "ECONNRESET",
+    "customerMessage": "We are unable to complete your request. Please try again later."
+  },
+  {
+    "technicalError": "ETIMEDOUT",
+    "customerMessage": "The operation has timed out."
+  },
+  {
+    "technicalError": "ENOTFOUND",
+    "customerMessage": "Sorry, a technical error occurred. Please try again later."
+  },
+  {
+    "technicalError": "ERR_TLS_CERT_ALTNAME_INVALID",
+    "customerMessage": "We encountered an invalid certificate when requesting data. Please try again later."
+  },
+  {
+    "technicalError": "404",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "401",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "403",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "429",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "502",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "504",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "500",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "No message available",
+    "customerMessage": "Sorry we are experiencing a technical problem. Please try again later"
+  },
+  {
+    "technicalError": "Context creation failed: Oops! You are not authorised to access this server",
+    "customerMessage": "Sorry, you are not allowed to access this page"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "session": {
+    "keys": ["secret key"],
+    "options": {
+      "key": "quikk",
+      "maxAge": 7776000000,
+      "sameSite": true,
+      "overwrite": true,
+      "httpOnly": true,
+      "signed": true,
+      "rolling": false,
+      "renew": false
+    }
+  }
+}

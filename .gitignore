@@ -1,0 +1,15 @@
+node_modules/
+.idea
+.env
+.env.dev
+.env.production
+error.log
+yarn-error.log
+safNeo.log
+*.log
+logs/
+yarn.lock
+coverage/
+.scannerwork/
+.vscode
+.DS_Store
